@@ -12,8 +12,13 @@ class Saltstack < Formula
     system "#{prefix}/salt.venv/bin/pip", "install", "-r", "requirements.txt"
     system "#{prefix}/salt.venv/bin/python", "setup.py", "install"
     bin.install_symlink "#{prefix}/salt.venv/bin/salt"
+    bin.install_symlink "#{prefix}/salt.venv/bin/salt-call"
+    bin.install_symlink "#{prefix}/salt.venv/bin/salt-cp"
+    bin.install_symlink "#{prefix}/salt.venv/bin/salt-key"
     bin.install_symlink "#{prefix}/salt.venv/bin/salt-master"
     bin.install_symlink "#{prefix}/salt.venv/bin/salt-minion"
+    bin.install_symlink "#{prefix}/salt.venv/bin/salt-run"
+    bin.install_symlink "#{prefix}/salt.venv/bin/salt-syndic"
   end
 
   def test
