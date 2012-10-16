@@ -2,12 +2,17 @@ require 'formula'
 
 class Saltstack < Formula
   homepage 'http://saltstack.org/'
-  url 'https://github.com/downloads/saltstack/salt/salt-0.9.9.1.tar.gz'
-  md5 '6a7c5bc7ee28cafb56f4d553f8f35b0b'
+  url 'https://github.com/downloads/saltstack/salt/salt-0.10.3.tar.gz'
+  sha1 '01d95378dc00c6586ea2c25ccf79a2b3a9cf45c6'
 
   depends_on 'zeromq'
+  depends_on 'swig' => :build
 
   def install
+    # Add folders to path (Superenv removes these)
+    # TODO: Move away from system virtualenv and use homebrew python
+    ENV.append "PATH", "/usr/local/bin", ":"
+    ENV.append "PATH", ( HOMEBREW_PREFIX / 'bin'), ":"
     system "virtualenv", "#{prefix}/salt.venv"
     system "#{prefix}/salt.venv/bin/pip", "install", "-r", "requirements.txt"
     system "#{prefix}/salt.venv/bin/python", "setup.py", "install"
