@@ -4,6 +4,6 @@ contains formulae for installing [Salt](http://saltstack.org/).
 Sample usage:
 
 ```
-brew tap msabramo/saltstack
+brew tap singingwolfboy/saltstack
 brew install -v saltstack
 ```
