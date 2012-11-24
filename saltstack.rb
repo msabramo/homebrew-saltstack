@@ -9,6 +9,11 @@ class Saltstack < Formula
   depends_on 'zeromq'
   depends_on 'swig' => :build
 
+  def patches
+    # set salt config dir to live under Homebrew's etc dir
+    'https://raw.github.com/gist/4139822/74f6adab3846cccb27b691c26b04e44a92defa06/gistfile1.diff'
+  end
+
   def install
     # Add folders to path (Superenv removes these)
     ENV.append "PATH", "/usr/local/bin", ":"
@@ -24,6 +29,7 @@ class Saltstack < Formula
     bin.install_symlink "#{prefix}/salt.venv/bin/salt-minion"
     bin.install_symlink "#{prefix}/salt.venv/bin/salt-run"
     bin.install_symlink "#{prefix}/salt.venv/bin/salt-syndic"
+    (etc+'salt').mkpath
   end
 
   def test
